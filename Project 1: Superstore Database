@@ -65,3 +65,8 @@ WHERE item_name = 'Air Purifier';
 SELECT item_name, price
 FROM superstore
 WHERE item_name = 'Memory Foam Mattress';
+
+#Show average price for each category.
+SELECT category, Avg(price) AS average_price
+FROM superstore
+GROUP BY category;
