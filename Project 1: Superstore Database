@@ -81,3 +81,9 @@ ORDER BY average_rating DESC;
 SELECT category,SUM(stock_quantity)
 FROM superstore
 WHERE category = 'Kitchen Supplies';
+
+#Show items with stock quantity below 25.
+SELECT item_name, stock_quantity
+FROM superstore
+WHERE stock_quantity < 25
+ORDER BY item_name;
