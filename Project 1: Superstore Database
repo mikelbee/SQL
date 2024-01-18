@@ -70,3 +70,14 @@ WHERE item_name = 'Memory Foam Mattress';
 SELECT category, Avg(price) AS average_price
 FROM superstore
 GROUP BY category;
+
+#Show items with average ratings above 4.5
+SELECT item_name, average_rating
+FROM superstore
+WHERE average_rating > 4.5
+ORDER BY average_rating DESC;
+
+#Show total stock quantity for all items in 'Kitchen Supplies' category
+SELECT category,SUM(stock_quantity)
+FROM superstore
+WHERE category = 'Kitchen Supplies';
