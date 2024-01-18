@@ -86,4 +86,4 @@ WHERE category = 'Kitchen Supplies';
 SELECT item_name, stock_quantity
 FROM superstore
 WHERE stock_quantity < 25
-ORDER BY item_name;
+ORDER BY stock_quantity DESC;
