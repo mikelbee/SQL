@@ -1,0 +1,57 @@
+# In this SQL, I'm querying a database with multiple tables in it to quantify statistics about employees and other relevant information. 
+
+# 1.Display all of the rows of the employees table, showing only the employees’ first and last names.
+SELECT
+    first_name,
+    last_name
+FROM
+    employees;
+
+# 2.Display all employees who were hired after August 1, 1999 (non-inclusive).
+SELECT
+    first_name || ' ' || last_name AS employee_name
+FROM
+    employees
+WHERE
+    hire_date > '1999-08-01';
+
+# 3.In this database, two tables are of the same schema. Combine them using a Union operator.
+SELECT * FROM dept_emp
+UNION
+SELECT * FROM dept_manager;
+
+# 4.Display the identifier and different salaries of the employee who was born on this date:  '1964-01-31', using a join.
+
+SELECT
+    employees.emp_no,
+    salaries.salary
+FROM salaries
+JOIN employees ON employees.emp_no = salaries.emp_no
+WHERE employees.birth_date = '1964-01-31';
+
+# 5.Using the join operator, produce a table specifying the name(s) of the department(s) in which the employee associated with identifier 499902 has worked (the table must also contain the start and end dates of employment in each department, as well as the employee’s last name and first name).
+
+SELECT
+    e.first_name,
+    e.last_name,
+    d.dept_name,
+    d2.from_date,
+    d2.to_date
+FROM
+    employees e
+JOIN
+    dept_emp d2 ON e.emp_no = d2.emp_no
+JOIN
+    departments d ON d.dept_no = d2.dept_no
+WHERE
+    e.emp_no = '499902';
+
+
+# 6.Using aggregation, find out how many people have the last name "Gewali" (the last name is provided in the last_name column of the "employees" table).
+
+SELECT COUNT
+    (last_name)
+FROM
+    employees
+WHERE
+    last_name = 'Gewali';
