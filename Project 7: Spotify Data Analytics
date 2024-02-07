@@ -102,5 +102,5 @@ CASE WHEN
     ELSE 'Fast' END AS song_tempo
 FROM
     BIT_DB.Spotifydata
-ORDER BY song_tempo DESC;
+ORDER BY song_tempo ASC;
     
