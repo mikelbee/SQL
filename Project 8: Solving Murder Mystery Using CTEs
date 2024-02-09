@@ -1,0 +1,57 @@
+# This project was completed using the SQL Murder Mystery Challenge database and resourcefrom https://mystery.knightlab.com/#experienced. I am particularly proud of my SQL for this challenge as I only completed it with one query.
+
+# Here the conditions of the advanced level of the mystery.
+# Congrats, you found the murderer! But wait, there's more...
+# If you think you're up for a challenge, try querying the interview transcript of the murderer to find the real villain behind this crime.
+# If you feel especially confident in your SQL skills, try to complete this final step with no more than 2 queries.
+
+# I joined two CTEs for this project to produce a filtered result.
+
+# First, I created the conditions of the first CTE using the SQL below.
+
+SELECT *
+FROM person p
+JOIN drivers_license dl ON p.license_id = dl.id
+WHERE dl.height = 65 OR 67
+AND dl.hair_color = 'red'
+AND dl.car_make = 'Tesla'
+AND dl.car_model = 'Model S'
+
+# Next, I created the created condition for the second CTE below.
+
+SELECT *
+FROM facebook_event_checkin fb
+JOIN person p ON p.id = fb.person_id
+WHERE date LIKE '201712%'
+AND event_name LIKE '%SQL Symphony Concert%'
+
+# Finally, I joined the two CTEs and queried it to produce the suspect.
+
+SELECT DISTINCT pdl.name
+FROM pdl
+INNER JOIN facebookEvent ON pdl.license_id = facebookEvent.license_id
+WHERE gender = 'female';
+
+# This is the final query I wrote to find the final suspect.
+
+WITH pdl AS(
+SELECT *
+FROM person p
+JOIN drivers_license dl ON p.license_id = dl.id
+WHERE dl.height = 65 OR 67
+AND dl.hair_color = 'red'
+AND dl.car_make = 'Tesla'
+AND dl.car_model = 'Model S'),
+
+facebookEvent AS(
+SELECT *
+FROM facebook_event_checkin fb
+JOIN person p ON p.id = fb.person_id
+WHERE date LIKE '201712%'
+AND event_name LIKE '%SQL Symphony Concert%'
+)
+
+SELECT DISTINCT pdl.name
+FROM pdl
+INNER JOIN facebookEvent ON pdl.license_id = facebookEvent.license_id
+WHERE gender = 'female';
