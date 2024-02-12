@@ -106,7 +106,7 @@ ORDER BY
 
 -- 11. Write a query that includes the purchased track name AND artist name with each invoice line ID.
 SELECT
-    i.invoiceid AS [Invoice ID],
+    it.invoicelineid AS [Invoice Line ID],
     t.name AS [Track Name],
     ar.Name AS [Artist Name]
 FROM
