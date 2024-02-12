@@ -108,11 +108,13 @@ ORDER BY
 SELECT
     i.invoiceid AS [Invoice ID],
     t.name AS [Track Name],
-    t.Name AS [Artist Name]
+    ar.Name AS [Artist Name]
 FROM
     invoices i
     JOIN invoice_items it ON it.invoiceid = i.invoiceid
     JOIN tracks t ON t.TrackId = it.TrackId
+    JOIN albums al ON al.AlbumId = t.AlbumId
+    JOIN artists ar ON ar.ArtistId = al.artistId
 ORDER BY
     [Invoice ID]
 ;
